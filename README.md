@@ -1,86 +1,135 @@
-# Bavest Financial Data API
 
-A Python backend service for accessing and processing financial and alternative data, similar to Bavest's infrastructure that powers financial applications for banks, fintechs, brokers, and asset managers.
-
-![Bavest API](https://via.placeholder.com/800x400?text=Bavest+Financial+Data+API)
+# Financial Data API
 
 ## Overview
 
-This API provides access to:
-- Market data (stocks, equities)
-- Cryptocurrency data
-- Alternative data sources
-- Sentiment analysis
-- Real-time streaming data
-
-The service is designed with scalability, performance, and reliability in mind, leveraging modern Python frameworks and cloud technologies.
+This Financial Data API provides a robust interface for accessing real-time and historical financial market data. Built with FastAPI, this high-performance API enables seamless integration of financial data into investment platforms, analysis tools, and financial applications.
 
 ## Features
 
-- **REST API** endpoints for querying financial data
-- **WebSocket support** for real-time streaming data
-- **Alternative data processing** capabilities
-- **Sentiment analysis** for financial assets
-- **Caching** for improved performance 
-- **Cloud-ready** architecture (AWS/GCP compatible)
-
-## Technology Stack
-
-- **Python 3.10+**
-- **FastAPI** - Modern, high-performance web framework
-- **Pandas/NumPy** - Data processing libraries
-- **AWS** - Kinesis, Lambda, ElasticCache integration
-- **Google Cloud** - Storage and processing capabilities
-- **Redis** - Caching layer
+- **Market Data Access**: Retrieve comprehensive stock, ETF, and cryptocurrency market data
+- **Historical Price Data**: Access historical pricing information with customizable time periods
+- **Financial Metrics**: Obtain fundamental financial metrics and ratios
+- **Portfolio Analytics**: Analyze investment portfolios with advanced metrics
+- **Fast Response Times**: Built on FastAPI for optimal performance and low-latency responses
 
 ## Getting Started
 
 ### Prerequisites
 
-- Python 3.10+
-- pip or poetry for package management
-- Optional: Redis for caching (can run in Docker)
-- Optional: AWS/GCP accounts for cloud features
+- Python 3.8+
+- pip (Python package manager)
 
 ### Installation
 
 1. Clone the repository:
-   
+
+```bash
+
+gitclonehttps://github.com/yourusername/financial-data-api.git
+
+cdfinancial-data-api
+
+```
 
 2. Install dependencies:
-   
 
-3. Create a `.env` file with your configuration (optional):
-   ```
-   DEBUG=True
-   MARKET_DATA_SOURCE=mock
-   REDIS_HOST=localhost
-   REDIS_PORT=6379
-   # Add AWS/GCP credentials if using cloud features
-   ```
+```bash
 
-4. Start the API server:
-   
+pipinstall-rrequirements.txt
 
-5. Access the API documentation at http://localhost:8000/docs
+```
+
+3. Launch the API:
+
+```bash
+
+uvicornmain:app--reload
+
+```
+
+The API will be available at `http://localhost:8000`.
+
+### API Documentation
+
+Once the server is running, visit `http://localhost:8000/docs` for the interactive Swagger documentation, which provides detailed information on all available endpoints.
 
 ## API Endpoints
 
-### Market Data
+The API offers the following main endpoints:
 
-- `POST /api/v1/market/data` - Fetch market data based on query parameters
-- `GET /api/v1/stocks/{symbol}` - Get historical stock data for a specific symbol
-- `GET /api/v1/crypto/{symbol}` - Get historical cryptocurrency data
+-`/api/stocks/{ticker}`: Retrieve current market data for a specific stock
 
-### Alternative Data
+-`/api/stocks/{ticker}/historical`: Get historical price data
 
-- `GET /api/v1/sentiment/{symbol}` - Get sentiment data for a specific asset
-- `POST /api/v1/alternative/process` - Process a batch of alternative data
+-`/api/portfolios/{portfolio_id}`: Analyze a specific portfolio
 
-### Real-Time Data
+-`/api/metrics/{ticker}`: Get financial metrics for a specific stock
 
-- `WebSocket /api/v1/stream/{symbol}` - Stream real-time data for a specific symbol
+## Authentication
 
-## Usage Examples
+API access requires authentication. The API uses API key authentication which should be included in the request header:
 
-### Fetch Stock Data
+```
+
+X-API-Key: your_api_key_here
+
+```
+
+## Examples
+
+### Request Market Data for a Stock
+
+```python
+
+import requests
+
+
+api_url ="http://localhost:8000/api/stocks/AAPL"
+
+headers = {"X-API-Key": "your_api_key_here"}
+
+
+response = requests.get(api_url, headers=headers)
+
+data = response.json()
+
+print(data)
+
+```
+
+### Request Historical Data
+
+```python
+
+import requests
+
+
+api_url ="http://localhost:8000/api/stocks/AAPL/historical"
+
+params = {
+
+    "start_date": "2023-01-01",
+
+    "end_date": "2023-03-31"
+
+}
+
+headers = {"X-API-Key": "your_api_key_here"}
+
+
+response = requests.get(api_url, params=params, headers=headers)
+
+data = response.json()
+
+print(data)
+
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
