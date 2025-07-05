@@ -26,7 +26,7 @@ This Financial Data API provides a robust interface for accessing real-time and 
 
 ```bash
 
-gitclonehttps://github.com/yourusername/financial-data-api.git
+gitclonehttps://github.com/yourusername/StockData
 
 cdfinancial-data-api
 
