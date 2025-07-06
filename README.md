@@ -1,4 +1,3 @@
-
 # Financial Data API
 
 ## Overview
@@ -125,10 +124,6 @@ data = response.json()
 print(data)
 
 ```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
